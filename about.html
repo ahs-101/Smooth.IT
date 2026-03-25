@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — Smooth.IT</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ── HERO ── */
+    .about-hero {
+      min-height: 70vh;
+      display: flex; align-items: center;
+      background:
+        radial-gradient(ellipse 100% 80% at 70% 40%, rgba(255,214,231,0.65) 0%, transparent 58%),
+        radial-gradient(ellipse 60% 90% at 10% 70%, rgba(245,230,216,0.5) 0%, transparent 55%),
+        linear-gradient(145deg, #FFF9FB 0%, #FFE8F4 55%, #FFD6E7 100%);
+      position: relative; overflow: hidden;
+    }
+    .about-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 50% 50% at 70% 50%, rgba(248,180,200,0.2) 0%, transparent 70%);
+    }
+    .about-hero-inner {
+      position: relative; z-index: 2;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+      padding: 80px 0;
+    }
+    .about-hero-text .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(248,180,200,0.2); border: 1px solid var(--pink);
+      color: var(--pink-deep); font-size: 0.78rem; font-weight: 800;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 6px 16px; border-radius: var(--radius-pill); margin-bottom: 20px;
+    }
+    .about-hero-text h1 { font-size: clamp(2.4rem, 5vw, 4rem); margin-bottom: 20px; }
+    .about-hero-text h1 em { color: var(--pink-deep); font-style: italic; display: block; }
+    .about-hero-text p { font-size: 1.08rem; color: var(--text-sec); line-height: 1.8; margin-bottom: 32px; }
+    .about-year {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.82rem; color: var(--muted); font-weight: 700;
+    }
+    .about-year span { color: var(--pink-deep); font-size: 1.2rem; font-family: var(--font-head); font-weight: 800; }
+
+    /* Decorative bloom */
+    .bloom-decoration {
+      position: relative; width: 100%; aspect-ratio: 1;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .bloom-circle {
+      position: absolute; border-radius: 50%;
+      opacity: 0.55; animation: bloom-float 6s ease-in-out infinite;
+    }
+    .bloom-circle:nth-child(1) { width: 260px; height: 260px; background: radial-gradient(circle, #F8B4C8, #F0D0E0); animation-delay: 0s; }
+    .bloom-circle:nth-child(2) { width: 200px; height: 200px; background: radial-gradient(circle, #FFD6E7, #F8C0D4); top: 10%; right: 8%; animation-delay: 1s; opacity: 0.45; }
+    .bloom-circle:nth-child(3) { width: 150px; height: 150px; background: radial-gradient(circle, #F5E6D8, #EAD0BC); bottom: 12%; left: 6%; animation-delay: 2s; opacity: 0.5; }
+    .bloom-circle:nth-child(4) { width: 100px; height: 100px; background: radial-gradient(circle, #F2C97F, #F0D090); top: 5%; left: 12%; animation-delay: 0.5s; opacity: 0.35; }
+    @keyframes bloom-float {
+      0%,100% { transform: translateY(0) scale(1); }
+      50%      { transform: translateY(-14px) scale(1.04); }
+    }
+    .bloom-center-text {
+      position: relative; z-index: 5; text-align: center;
+    }
+    .bloom-center-text .big-num {
+      font-family: var(--font-head); font-size: 5rem; font-weight: 700;
+      color: var(--text); line-height: 1; display: block;
+    }
+    .bloom-center-text .big-label {
+      font-size: 0.82rem; font-weight: 700; color: var(--muted);
+      letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .sparkle-a { position: absolute; color: var(--pink); animation: sparkle-fade 3s infinite; pointer-events: none; z-index: 6; }
+    .sparkle-a.s1 { top: 8%;  left: 4%;  font-size: 1.1rem; }
+    .sparkle-a.s2 { bottom: 8%; right: 4%; font-size: 0.9rem; animation-delay: 1.3s; }
+    @keyframes sparkle-fade { 0%,100%{opacity:0.3;transform:scale(1)} 50%{opacity:1;transform:scale(1.2)} }
+
+    /* ── STORY ── */
+    .story-section { padding: var(--sp-20) 0; background: var(--bg); }
+    .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .story-text .sec-head { text-align: left; }
+    .story-text .sec-head .line { margin-left: 0; }
+    .story-text p { font-size: 1rem; color: var(--text-sec); line-height: 1.85; margin-bottom: 20px; }
+    .story-text p:last-child { margin-bottom: 0; }
+    .story-visual {
+      background: var(--bg-section);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      border: 1px solid var(--border-lt);
+      display: flex; flex-direction: column; gap: 20px;
+    }
+    .story-stat {
+      display: flex; align-items: center; gap: 18px;
+      padding: 18px 20px;
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-lt);
+      box-shadow: var(--shadow-sm);
+      transition: all var(--trans);
+    }
+    .story-stat:hover { transform: translateX(4px); box-shadow: var(--shadow-card); }
+    .stat-icon {
+      width: 48px; height: 48px; border-radius: var(--radius);
+      background: linear-gradient(135deg, var(--pink), var(--pink-deep));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; flex-shrink: 0;
+    }
+    .stat-text strong { display: block; font-size: 1.4rem; font-family: var(--font-head); font-weight: 700; }
+    .stat-text span   { font-size: 0.8rem; color: var(--muted); font-weight: 600; }
+
+    /* ── VALUES ── */
+    .values-section { padding: var(--sp-20) 0; background: var(--bg-section); }
+    .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .value-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      padding: 36px 28px;
+      border: 1px solid var(--border-lt);
+      box-shadow: var(--shadow-card);
+      text-align: center;
+      transition: all var(--trans-md);
+    }
+    .value-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-card-h); border-color: var(--pink); }
+    .value-icon {
+      width: 70px; height: 70px; border-radius: 50%;
+      margin: 0 auto 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+    }
+    .value-icon.pink  { background: linear-gradient(135deg, var(--pink-light), var(--pink)); }
+    .value-icon.nude  { background: linear-gradient(135deg, var(--nude), var(--nude-deep)); }
+    .value-icon.gold  { background: linear-gradient(135deg, rgba(242,201,127,0.3), rgba(242,201,127,0.6)); }
+    .value-card h3 { font-size: 1.1rem; margin-bottom: 10px; }
+    .value-card p  { font-size: 0.9rem; color: var(--text-sec); line-height: 1.7; }
+
+    /* ── TEAM ── */
+    .team-section { padding: var(--sp-20) 0; background: var(--bg); }
+    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .team-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-xl);
+      padding: 36px 28px;
+      border: 1px solid var(--border-lt);
+      box-shadow: var(--shadow-card);
+      text-align: center;
+      transition: all var(--trans-md);
+    }
+    .team-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-card-h); }
+    .team-avatar {
+      width: 80px; height: 80px; border-radius: 50%;
+      margin: 0 auto 18px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; font-weight: 800; color: var(--white);
+      font-family: var(--font-head);
+    }
+    .team-avatar.a1 { background: linear-gradient(135deg, #F8B4C8, #E8A4B8); }
+    .team-avatar.a2 { background: linear-gradient(135deg, #D4B4E8, #B890D0); }
+    .team-avatar.a3 { background: linear-gradient(135deg, #F2C97F, #E8A840); }
+    .team-card h3 { font-size: 1.1rem; margin-bottom: 4px; }
+    .team-role { font-size: 0.78rem; color: var(--pink-deep); font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+    .team-card p { font-size: 0.88rem; color: var(--text-sec); line-height: 1.7; }
+
+    /* ── PROMISE BANNER ── */
+    .promise-banner {
+      background: linear-gradient(135deg, var(--text) 0%, #5A3A45 50%, #3D2B35 100%);
+      padding: 88px 0; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .promise-banner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(248,180,200,0.15) 0%, transparent 70%);
+    }
+    .promise-quote {
+      position: relative; z-index: 2;
+      font-family: var(--font-head);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-style: italic;
+      color: var(--white);
+      max-width: 760px; margin: 0 auto;
+      line-height: 1.4;
+    }
+    .promise-quote em { color: var(--pink); }
+    .promise-attr {
+      position: relative; z-index: 2;
+      font-size: 0.88rem; color: rgba(255,255,255,0.55);
+      margin-top: 24px; font-weight: 600;
+    }
+
+    @media (max-width: 900px) {
+      .about-hero-inner { grid-template-columns: 1fr; gap: 48px; padding: 60px 0; }
+      .bloom-decoration { max-width: 360px; margin: 0 auto; }
+      .story-grid { grid-template-columns: 1fr; gap: 48px; }
+      .values-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .team-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <a href="index.html" class="navbar-logo">Smooth<em>.IT</em></a>
+    <ul class="navbar-links" id="navbar-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="categories.html">Categories</a></li>
+      <li><a href="favorites.html">Favorites</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="navbar-right">
+      <button class="cart-icon" id="cart-icon" aria-label="Shopping bag">
+        🛍️<span class="cart-badge" id="cart-badge">0</span>
+      </button>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="about-hero">
+  <div class="container">
+    <div class="about-hero-inner">
+      <div class="about-hero-text fi">
+        <div class="eyebrow">✦ Est. 2020</div>
+        <h1>Beauty That <em>Feels Like You</em></h1>
+        <p>Smooth.IT was born from a simple belief: that makeup should enhance who you are, not hide it. Every formula we create starts with your skin, your confidence, and your story.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a href="shop.html" class="btn btn-primary">Explore Collection</a>
+          <a href="contact.html" class="btn btn-secondary">Get in Touch</a>
+        </div>
+        <div class="about-year" style="margin-top:24px">
+          <span>2025</span> · 5 years of smooth beauty
+        </div>
+      </div>
+      <div class="fi stagger-2">
+        <div class="bloom-decoration">
+          <div class="bloom-circle"></div>
+          <div class="bloom-circle"></div>
+          <div class="bloom-circle"></div>
+          <div class="bloom-circle"></div>
+          <span class="sparkle-a s1">✦</span>
+          <span class="sparkle-a s2">✦</span>
+          <div class="bloom-center-text">
+            <span class="big-num">50K</span>
+            <span class="big-label">Happy Customers</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story-section">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-text fi">
+        <div class="sec-head" style="text-align:left;margin-bottom:32px">
+          <div class="badge">Our Story</div>
+          <h2>Where It All Began</h2>
+          <div class="line" style="margin-left:0"></div>
+        </div>
+        <p>Smooth.IT was founded in 2020 by three friends who were frustrated with the beauty industry. Products were either too heavy, too expensive, or full of ingredients that irritated their skin. They wanted something different — something clean, effective, and genuinely enjoyable to use.</p>
+        <p>Starting from a small lab in Los Angeles, they developed their first formula: the now-iconic Blurring Primer. The response was extraordinary. Word spread, the community grew, and Smooth.IT became the brand that thousands of beauty lovers trust every single day.</p>
+        <p>Today, we offer 12 hero products spanning skin prep, color, and tools — all formulated with clean, skin-loving ingredients and tested by real people with real skin. Our mission hasn't changed: makeup that makes you feel effortlessly, beautifully yourself.</p>
+      </div>
+      <div class="story-visual fi stagger-2">
+        <div class="story-stat">
+          <div class="stat-icon">🌿</div>
+          <div class="stat-text"><strong>100%</strong><span>Clean Ingredients</span></div>
+        </div>
+        <div class="story-stat">
+          <div class="stat-icon">🐰</div>
+          <div class="stat-text"><strong>Always</strong><span>Vegan & Cruelty-Free</span></div>
+        </div>
+        <div class="story-stat">
+          <div class="stat-icon">⭐</div>
+          <div class="stat-text"><strong>4.9 / 5</strong><span>Average Rating</span></div>
+        </div>
+        <div class="story-stat">
+          <div class="stat-icon">🌍</div>
+          <div class="stat-text"><strong>50K+</strong><span>Happy Customers Worldwide</span></div>
+        </div>
+        <div class="story-stat">
+          <div class="stat-icon">🔬</div>
+          <div class="stat-text"><strong>Tested</strong><span>By Dermatologists</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values-section">
+  <div class="container">
+    <div class="sec-head fi">
+      <div class="badge">What We Stand For</div>
+      <h2>Our Values</h2>
+      <p>Three pillars that guide everything we create.</p>
+      <div class="line"></div>
+    </div>
+    <div class="values-grid">
+      <div class="value-card fi stagger-1">
+        <div class="value-icon pink">🌸</div>
+        <h3>Clean Beauty</h3>
+        <p>Every formula is free from parabens, sulfates, synthetic fragrance, and harmful fillers. We only use ingredients we'd put on our own skin — because we do.</p>
+      </div>
+      <div class="value-card fi stagger-2">
+        <div class="value-icon nude">✨</div>
+        <h3>Inclusive Shade Ranges</h3>
+        <p>Beauty is for everyone. We formulate with the full spectrum of skin tones in mind, from the fairest porcelain to the deepest ebony — and everything in between.</p>
+      </div>
+      <div class="value-card fi stagger-3">
+        <div class="value-icon gold">💛</div>
+        <h3>Sustainable Practices</h3>
+        <p>Our packaging is fully recyclable, our lab runs on renewable energy, and we're committed to reducing our carbon footprint by 50% by 2027. Beauty with a conscience.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team-section">
+  <div class="container">
+    <div class="sec-head fi">
+      <div class="badge">The People Behind Smooth.IT</div>
+      <h2>Meet Our Team</h2>
+      <p>Founders, formulators, and beauty obsessives.</p>
+      <div class="line"></div>
+    </div>
+    <div class="team-grid">
+      <div class="team-card fi stagger-1">
+        <div class="team-avatar a1">N</div>
+        <h3>Nadia Flores</h3>
+        <div class="team-role">Co-Founder & CEO</div>
+        <p>Former cosmetic chemist with 12 years of experience. Nadia leads formula development and ensures every product meets Smooth.IT's exacting clean beauty standards.</p>
+      </div>
+      <div class="team-card fi stagger-2">
+        <div class="team-avatar a2">S</div>
+        <h3>Sara Okafor</h3>
+        <div class="team-role">Co-Founder & Creative Director</div>
+        <p>Makeup artist and brand visionary. Sara brings the Smooth.IT aesthetic to life — from packaging design to campaign photography and the community she helps build every day.</p>
+      </div>
+      <div class="team-card fi stagger-3">
+        <div class="team-avatar a3">L</div>
+        <h3>Lena Park</h3>
+        <div class="team-role">Co-Founder & COO</div>
+        <p>Operations and sustainability lead. Lena manages supply chain, ethical sourcing partnerships, and Smooth.IT's ongoing commitment to reducing environmental impact.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMISE BANNER -->
+<section class="promise-banner">
+  <div class="sparkle-overlay"></div>
+  <div class="container">
+    <p class="promise-quote">"We don't make makeup that hides you. We make makeup that <em>reveals the best version of you</em> — effortlessly."</p>
+    <p class="promise-attr">— Nadia, Sara & Lena · Smooth.IT Co-Founders</p>
+    <div style="margin-top:36px;position:relative;z-index:2;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="shop.html" class="btn btn-primary btn-lg">Shop Our Collection</a>
+      <a href="contact.html" class="btn btn-secondary btn-lg" style="color:var(--pink-light);border-color:rgba(248,180,200,0.4)">Say Hello</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">Smooth<em>.IT</em></div>
+        <p>Premium makeup for every skin type, tone, and texture. Clean ingredients. Effortless results.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn" title="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="#" class="social-btn" title="TikTok">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.19 8.19 0 0 0 4.79 1.52V6.75a4.85 4.85 0 0 1-1.02-.06z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Shop</h4><ul><li><a href="shop.html">All Products</a></li><li><a href="favorites.html">Favorites</a></li><li><a href="categories.html">Categories</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Support</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Returns</a></li><li><a href="#">FAQ</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2025 Smooth.IT</span><span>Made with ♥ for beauty lovers</span></div>
+  </div>
+</footer>
+
+<div id="cart-overlay" class="cart-overlay"></div>
+<aside id="cart-drawer" class="cart-drawer">
+  <div class="cart-header"><h2>Your Bag 🛍️</h2><button class="cart-close" id="cart-close">✕</button></div>
+  <div id="cart-items" class="cart-items"></div>
+  <div class="cart-footer">
+    <div class="cart-total">Total <strong id="cart-total-price">$0</strong></div>
+    <a href="#" class="btn btn-primary btn-block">Checkout</a>
+  </div>
+</aside>
+<button id="scroll-top" aria-label="Back to top">↑</button>
+
+<script src="products-data.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

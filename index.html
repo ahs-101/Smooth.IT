@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smooth.IT — Premium Makeup & Beauty</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+      background:
+        radial-gradient(ellipse 110% 80% at 75% 40%, rgba(255,214,231,0.75) 0%, transparent 58%),
+        radial-gradient(ellipse 70% 100% at 15% 80%, rgba(248,180,200,0.45) 0%, transparent 55%),
+        linear-gradient(145deg, #FFF9FB 0%, #FFE8F2 55%, #FFD6E7 100%);
+    }
+    .hero-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(248,180,200,0.35) 0%, transparent 70%);
+      right: 5%; top: 50%; transform: translateY(-50%);
+      animation: glow-pulse 5s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes glow-pulse {
+      0%,100% { transform: translateY(-50%) scale(1);   opacity: 0.6; }
+      50%      { transform: translateY(-50%) scale(1.1); opacity: 1; }
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 600px;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(248,180,200,0.18);
+      border: 1px solid var(--pink);
+      color: var(--pink-deep);
+      font-size: 0.78rem; font-weight: 800;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 6px 16px; border-radius: var(--radius-pill);
+      margin-bottom: 24px;
+    }
+    .hero-title {
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 1.05; margin-bottom: 20px;
+      color: var(--text);
+    }
+    .hero-title em { color: var(--pink-deep); font-style: italic; display: block; }
+    .hero-sub { font-size: 1.12rem; color: var(--text-sec); margin-bottom: 36px; max-width: 460px; line-height: 1.7; }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-stats {
+      display: flex; gap: 40px; margin-top: 52px;
+      padding-top: 28px; border-top: 1px solid rgba(232,164,184,0.25);
+    }
+    .hero-stat strong { display: block; font-size: 1.6rem; font-family: var(--font-head); font-weight: 700; color: var(--text); }
+    .hero-stat span   { font-size: 0.8rem; color: var(--muted); font-weight: 600; letter-spacing: 0.04em; }
+    .hero-right {
+      position: absolute; right: 6%; top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+    }
+    .hero-product-card {
+      width: 300px;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(20px);
+      border-radius: 28px;
+      padding: 8px 8px 20px;
+      box-shadow: 0 20px 60px rgba(232,164,184,0.35), 0 4px 16px rgba(61,43,53,0.08);
+      border: 1px solid rgba(240,214,224,0.8);
+      transition: transform 0.4s ease;
+    }
+    .hero-product-card:hover { transform: translateY(-8px) rotate(1deg); }
+    .hero-card-visual {
+      height: 260px;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-card-info { padding: 16px 12px 4px; }
+    .hero-card-info .name { font-family: var(--font-head); font-size: 1.15rem; font-weight: 700; }
+    .hero-card-info .price { font-weight: 800; color: var(--pink-deep); font-size: 1rem; margin-top: 4px; }
+    .hero-card-badge {
+      position: absolute; top: 12px; left: 12px; z-index: 5;
+      background: var(--gold); color: var(--text);
+      font-size: 0.68rem; font-weight: 800;
+      padding: 4px 10px; border-radius: var(--radius-pill);
+      letter-spacing: 0.06em;
+    }
+    .sparkle-hero {
+      position: absolute; font-size: 1.5rem; animation: sparkle-fade 3s infinite;
+      pointer-events: none; color: var(--pink);
+    }
+    .sparkle-hero.s1 { top: 12%; left: 8%; animation-delay: 0s; font-size: 1rem; }
+    .sparkle-hero.s2 { top: 22%; right: 20%; animation-delay: 1.2s; }
+    .sparkle-hero.s3 { bottom: 28%; left: 12%; animation-delay: 0.7s; font-size: 1.2rem; }
+    .sparkle-hero.s4 { bottom: 18%; right: 8%; animation-delay: 1.8s; font-size: 0.9rem; }
+
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      background: linear-gradient(90deg, var(--text) 0%, #5A3A45 50%, var(--text) 100%);
+      padding: 14px 0;
+      overflow: hidden;
+    }
+    .trust-track {
+      display: flex; align-items: center; gap: 48px;
+      animation: scroll-track 20s linear infinite;
+      white-space: nowrap;
+    }
+    @keyframes scroll-track {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 10px;
+      color: rgba(255,255,255,0.85); font-size: 0.82rem;
+      font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .trust-dot { color: var(--pink); font-size: 0.6rem; }
+
+    /* ── BESTSELLERS / TRENDING SECTION ── */
+    .products-section { background: var(--bg); }
+    .products-section.alt { background: var(--bg-section); }
+    .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+
+    /* ── TRENDING SCROLL ── */
+    .trending-scroll {
+      display: flex; gap: 24px;
+      overflow-x: auto; padding-bottom: 8px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .trending-scroll::-webkit-scrollbar { display: none; }
+    .trending-scroll .product-card {
+      min-width: 240px; max-width: 260px;
+      scroll-snap-align: start; flex-shrink: 0;
+    }
+    .scroll-wrapper { position: relative; }
+    .scroll-fade {
+      position: absolute; right: 0; top: 0; bottom: 8px;
+      width: 80px;
+      background: linear-gradient(to right, transparent, var(--bg));
+      pointer-events: none;
+    }
+
+    /* ── CATEGORIES GRID ── */
+    .cat-section { background: var(--bg-section); }
+    .home-cat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .home-cat-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-lt);
+      box-shadow: var(--shadow-card);
+      transition: all var(--trans-md);
+      text-decoration: none; color: var(--text);
+      display: flex; flex-direction: column;
+    }
+    .home-cat-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-card-h); border-color: var(--pink); }
+    .cat-thumb {
+      height: 120px; position: relative; overflow: hidden;
+      transition: transform var(--trans-md);
+    }
+    .home-cat-card:hover .cat-thumb { transform: scale(1.06); }
+    .cat-thumb-info { padding: 14px 16px; }
+    .cat-thumb-info h4 { font-size: 0.95rem; font-weight: 800; margin-bottom: 2px; }
+    .cat-thumb-info span { font-size: 0.75rem; color: var(--muted); font-weight: 600; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-section { background: var(--bg); }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .testimonial-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      border: 1px solid var(--border-lt);
+      box-shadow: var(--shadow-card);
+      transition: all var(--trans-md);
+    }
+    .testimonial-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card-h); }
+    .testimonial-stars { color: var(--gold); font-size: 1rem; letter-spacing: 2px; margin-bottom: 14px; }
+    .testimonial-text { font-size: 0.95rem; line-height: 1.7; color: var(--text-sec); margin-bottom: 18px; font-style: italic; }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .t-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--pink-deep));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; color: var(--white); font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .t-name { font-weight: 700; font-size: 0.88rem; }
+    .t-sub  { font-size: 0.75rem; color: var(--muted); }
+
+    /* ── BRAND BANNER ── */
+    .brand-banner {
+      background: linear-gradient(135deg, var(--text) 0%, #5A3A45 50%, #3D2B35 100%);
+      padding: 80px 0; text-align: center; position: relative; overflow: hidden;
+    }
+    .brand-banner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(248,180,200,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .brand-banner h2 { color: var(--white); font-size: clamp(2rem, 4vw, 3.2rem); margin-bottom: 16px; }
+    .brand-banner h2 em { color: var(--pink); font-style: italic; }
+    .brand-banner p { color: rgba(255,255,255,0.7); font-size: 1.08rem; margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+    @media (max-width: 1024px) {
+      .hero-right { display: none; }
+      .hero-content { max-width: 100%; }
+      .products-grid { grid-template-columns: repeat(3, 1fr); }
+      .home-cat-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .hero { min-height: auto; padding: 100px 0 60px; }
+      .hero-stats { gap: 24px; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .home-cat-grid { grid-template-columns: repeat(2, 1fr); }
+      .testimonials-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .products-grid { grid-template-columns: 1fr; }
+      .home-cat-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <a href="index.html" class="navbar-logo">Smooth<em>.IT</em></a>
+    <ul class="navbar-links" id="navbar-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="categories.html">Categories</a></li>
+      <li><a href="favorites.html">Favorites</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="navbar-right">
+      <button class="cart-icon" id="cart-icon" aria-label="Shopping bag">
+        🛍️<span class="cart-badge" id="cart-badge">0</span>
+      </button>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="sparkle-hero s1">✦</div>
+  <div class="sparkle-hero s2">✦</div>
+  <div class="sparkle-hero s3">✦</div>
+  <div class="sparkle-hero s4">✦</div>
+  <div class="container">
+    <div class="hero-content fi">
+      <div class="hero-eyebrow">✦ New Collection 2025</div>
+      <h1 class="hero-title">
+        Where Beauty
+        <em>Meets Bliss</em>
+      </h1>
+      <p class="hero-sub">Premium makeup crafted with clean ingredients, thoughtful formulas, and love — for the way you want to feel every single day.</p>
+      <div class="hero-btns">
+        <a href="shop.html" class="btn btn-primary btn-lg">Shop Now</a>
+        <a href="favorites.html" class="btn btn-secondary btn-lg">Our Favorites</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong>50K+</strong><span>Happy Customers</span></div>
+        <div class="hero-stat"><strong>4.9★</strong><span>Average Rating</span></div>
+        <div class="hero-stat"><strong>12+</strong><span>Hero Products</span></div>
+      </div>
+    </div>
+  </div>
+  <!-- Floating hero product card -->
+  <div class="hero-right">
+    <a href="product.html?id=5" class="hero-product-card">
+      <div class="hero-card-visual">
+        <div class="product-visual visual-skin-tint" style="height:100%;border-radius:20px">
+          <span class="visual-icon" style="font-size:3.5rem">Blurring</span>
+          <div class="sparkle-overlay"></div>
+        </div>
+        <div class="hero-card-badge">✦ Best Seller</div>
+      </div>
+      <div class="hero-card-info">
+        <div class="name">Blurring Skin Tint</div>
+        <div class="price">$36 · SPF 30 · 20 Shades</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-track">
+    <div class="trust-item"><span>✦</span>Free Shipping Over $50</div>
+    <div class="trust-item"><span class="trust-dot">•</span></div>
+    <div class="trust-item"><span>✦</span>Clean Ingredients</div>
+    <div class="trust-item"><span class="trust-dot">•</span></div>
+    <div class="trust-item"><span>✦</span>Vegan &amp; Cruelty-Free</div>
+    <div class="trust-item"><span class="trust-dot">•</span></div>
+    <div class="trust-item"><span>✦</span>30-Day Returns</div>
+    <div class="trust-item"><span class="trust-dot">•</span></div>
+    <div class="trust-item"><span>✦</span>Dermatologist Tested</div>
+    <div class="trust-item"><span class="trust-dot">•</span></div>
+    <!-- repeat for infinite scroll -->
+    <div class="trust-item"><span>✦</span>Free Shipping Over $50</div>
+    <div class="trust-item"><span class="trust-dot">•</span></div>
+    <div class="trust-item"><span>✦</span>Clean Ingredients</div>
+    <div class="trust-item"><span class="trust-dot">•</span></div>
+    <div class="trust-item"><span>✦</span>Vegan &amp; Cruelty-Free</div>
+    <div class="trust-item"><span class="trust-dot">•</span></div>
+    <div class="trust-item"><span>✦</span>30-Day Returns</div>
+    <div class="trust-item"><span class="trust-dot">•</span></div>
+    <div class="trust-item"><span>✦</span>Dermatologist Tested</div>
+    <div class="trust-item"><span class="trust-dot">•</span></div>
+  </div>
+</div>
+
+<!-- BEST SELLERS -->
+<section class="section products-section">
+  <div class="container">
+    <div class="sec-head fi">
+      <div class="badge">Top Picks</div>
+      <h2>Best Sellers</h2>
+      <p>Our most-loved products, chosen by thousands of happy customers.</p>
+      <div class="line"></div>
+    </div>
+    <div class="products-grid" id="home-bestsellers"></div>
+    <div style="text-align:center;margin-top:40px" class="fi">
+      <a href="shop.html" class="btn btn-secondary btn-lg">View All Products</a>
+    </div>
+  </div>
+</section>
+
+<!-- TRENDING -->
+<section class="section products-section alt">
+  <div class="container">
+    <div class="sec-head fi">
+      <div class="badge">Right Now</div>
+      <h2>Trending Products</h2>
+      <p>What everyone's reaching for this season.</p>
+      <div class="line"></div>
+    </div>
+    <div class="scroll-wrapper fi">
+      <div class="trending-scroll" id="home-trending"></div>
+      <div class="scroll-fade"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section cat-section">
+  <div class="container">
+    <div class="sec-head fi">
+      <div class="badge">Browse</div>
+      <h2>Shop by Category</h2>
+      <p>Discover everything you need for a complete beauty routine.</p>
+      <div class="line"></div>
+    </div>
+    <div class="home-cat-grid">
+      <a href="shop.html?cat=primer" class="home-cat-card fi stagger-1">
+        <div class="cat-thumb cat-primer"><div class="sparkle-overlay"></div></div>
+        <div class="cat-thumb-info"><h4>Primers</h4><span>1 product</span></div>
+      </a>
+      <a href="shop.html?cat=foundation" class="home-cat-card fi stagger-2">
+        <div class="cat-thumb cat-foundation"><div class="sparkle-overlay"></div></div>
+        <div class="cat-thumb-info"><h4>Foundation</h4><span>2 products</span></div>
+      </a>
+      <a href="shop.html?cat=powder" class="home-cat-card fi stagger-3">
+        <div class="cat-thumb cat-powder"><div class="sparkle-overlay"></div></div>
+        <div class="cat-thumb-info"><h4>Face Powders</h4><span>1 product</span></div>
+      </a>
+      <a href="shop.html?cat=lips" class="home-cat-card fi stagger-4">
+        <div class="cat-thumb cat-lips"><div class="sparkle-overlay"></div></div>
+        <div class="cat-thumb-info"><h4>Lip Color</h4><span>1 product</span></div>
+      </a>
+      <a href="shop.html?cat=eyes" class="home-cat-card fi stagger-1">
+        <div class="cat-thumb cat-eyes"><div class="sparkle-overlay"></div></div>
+        <div class="cat-thumb-info"><h4>Eyes</h4><span>3 products</span></div>
+      </a>
+      <a href="shop.html?cat=cheeks" class="home-cat-card fi stagger-2">
+        <div class="cat-thumb cat-cheeks"><div class="sparkle-overlay"></div></div>
+        <div class="cat-thumb-info"><h4>Cheeks</h4><span>2 products</span></div>
+      </a>
+      <a href="shop.html?cat=setting" class="home-cat-card fi stagger-3">
+        <div class="cat-thumb cat-setting"><div class="sparkle-overlay"></div></div>
+        <div class="cat-thumb-info"><h4>Setting Sprays</h4><span>1 product</span></div>
+      </a>
+      <a href="shop.html?cat=tools" class="home-cat-card fi stagger-4">
+        <div class="cat-thumb cat-tools"><div class="sparkle-overlay"></div></div>
+        <div class="cat-thumb-info"><h4>Tools</h4><span>1 product</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testimonials-section">
+  <div class="container">
+    <div class="sec-head fi">
+      <div class="badge">Real Reviews</div>
+      <h2>What Our Community Says</h2>
+      <p>Thousands of happy customers can't be wrong.</p>
+      <div class="line"></div>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fi stagger-1">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Smooth.IT completely changed my makeup routine. The Blurring Primer + Skin Tint combo makes my skin look like a filter in real life. I get compliments every single day!"</p>
+        <div class="testimonial-author">
+          <div class="t-avatar">S</div>
+          <div><div class="t-name">Sofia Martinez</div><div class="t-sub">Verified Customer · 2 years</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card fi stagger-2">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"I've tried every luxury makeup brand and nothing compares to Smooth.IT's formulas. The setting spray alone keeps my makeup perfect through 12-hour work days. Worth every penny."</p>
+        <div class="testimonial-author">
+          <div class="t-avatar">A</div>
+          <div><div class="t-name">Aria Kim</div><div class="t-sub">Verified Customer · Beauty Blogger</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card fi stagger-3">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"The packaging is gorgeous, the formulas are clean and skin-loving, and the results are unreal. Smooth.IT is my forever brand. The Eyeshadow Palette is pure art."</p>
+        <div class="testimonial-author">
+          <div class="t-avatar">P</div>
+          <div><div class="t-name">Priya Rajan</div><div class="t-sub">Verified Customer · Makeup Artist</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND BANNER -->
+<section class="brand-banner">
+  <div class="sparkle-overlay"></div>
+  <div class="container" style="position:relative;z-index:2">
+    <div class="fi">
+      <h2>Crafted with love.<br><em>Worn with confidence.</em></h2>
+      <p>Every formula is developed with care, tested on real skin, and designed to make you feel like the most beautiful version of yourself.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+        <a href="about.html" class="btn btn-primary btn-lg">Our Story</a>
+        <a href="shop.html" class="btn btn-secondary btn-lg" style="color:var(--pink-light);border-color:rgba(248,180,200,0.5)">Shop Collection</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">Smooth<em>.IT</em></div>
+        <p>Premium makeup for every skin type, tone, and texture. Clean ingredients. Effortless results. Always.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn" title="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="#" class="social-btn" title="TikTok">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.19 8.19 0 0 0 4.79 1.52V6.75a4.85 4.85 0 0 1-1.02-.06z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="shop.html">All Products</a></li>
+          <li><a href="favorites.html">Favorites</a></li>
+          <li><a href="shop.html?cat=foundation">Foundation</a></li>
+          <li><a href="shop.html?cat=lips">Lips</a></li>
+          <li><a href="shop.html?cat=eyes">Eyes</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Shipping &amp; Returns</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Smooth.IT — All rights reserved.</span>
+      <span>Made with ♥ for beauty lovers</span>
+    </div>
+  </div>
+</footer>
+
+<!-- CART DRAWER -->
+<div id="cart-overlay" class="cart-overlay"></div>
+<aside id="cart-drawer" class="cart-drawer">
+  <div class="cart-header">
+    <h2>Your Bag 🛍️</h2>
+    <button class="cart-close" id="cart-close">✕</button>
+  </div>
+  <div id="cart-items" class="cart-items"></div>
+  <div class="cart-footer">
+    <div class="cart-total">Total <strong id="cart-total-price">$0</strong></div>
+    <a href="#" class="btn btn-primary btn-block">Checkout</a>
+  </div>
+</aside>
+
+<!-- SCROLL TO TOP -->
+<button id="scroll-top" aria-label="Back to top">↑</button>
+
+<script src="products-data.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
